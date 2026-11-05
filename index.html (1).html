@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7d4e3">
+<title>For Rizma ♡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#75465e;--muted:#a07891;--rose:#c66e99;--white:rgba(255,255,255,.60)}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:"DM Sans",sans-serif;color:var(--ink);background:radial-gradient(circle at 12% 15%,#fff9fc 0,transparent 34%),radial-gradient(circle at 90% 80%,#eeb9d1 0,transparent 38%),linear-gradient(135deg,#f8d9e7,#fff0f6 52%,#edc5da)}
+button,input{font:inherit}
+button{cursor:pointer}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;background:#fff5;filter:blur(4px);animation:float 12s ease-in-out infinite alternate}
+.orb.a{width:260px;height:260px;left:-90px;top:10%}.orb.b{width:340px;height:340px;right:-130px;bottom:-100px;animation-delay:-5s}
+@keyframes float{to{transform:translate(35px,-25px) scale(1.08)}}
+@keyframes enter{from{opacity:0;transform:translateY(24px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes bob{50%{transform:translateY(-9px) rotate(4deg)}}
+@keyframes pop{0%{transform:scale(.5);opacity:0}75%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes sparkle{50%{transform:translateY(-8px) rotate(15deg);opacity:.55}}
+.glass{background:var(--white);border:1px solid #ffffffbd;box-shadow:0 25px 80px #9c58751c;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+#gate{position:fixed;inset:0;z-index:5;display:grid;place-items:center;padding:20px}
+.gate-card{width:min(420px,100%);padding:42px 34px;border-radius:30px;text-align:center;animation:enter .8s ease}
+.seal{width:65px;height:65px;margin:0 auto 18px;display:grid;place-items:center;border-radius:22px;background:linear-gradient(145deg,#fff,#f4c5d9);font-size:30px}
+.eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--rose);font-weight:700}
+h1,h2{font-family:"Playfair Display",serif;font-weight:600}
+.gate-card h1{font-size:34px;margin:12px 0}
+.gate-card p{font-size:13px;line-height:1.8;color:var(--muted)}
+.clue{margin:22px 0 14px;padding:12px;border-radius:14px;background:#fff8;font-size:12px}
+input{width:100%;padding:15px;border:1px solid #e6bfd0;border-radius:14px;background:#fff9;outline:none;text-align:center;letter-spacing:8px;color:var(--ink)}
+input:focus{border-color:var(--rose);box-shadow:0 0 0 4px #d985ad20}
+.btn{border:0;border-radius:14px;padding:14px 22px;background:linear-gradient(120deg,#d98bb0,#bb638f);color:white;font-weight:700;box-shadow:0 9px 23px #b65b8830;transition:.2s}
+.btn:hover{transform:translateY(-2px)}
+.gate-card .btn{width:100%;margin-top:12px}
+#error{min-height:18px;color:#b94c79;font-size:12px;margin-top:10px}
+#show{display:none;position:relative;z-index:1;width:100%;height:100%;padding:22px}
+.deck{position:relative;width:min(1120px,100%);height:100%;max-height:850px;margin:auto;border:1px solid #ffffff9c;border-radius:30px;overflow:hidden;background:#ffffff27;box-shadow:0 25px 90px #98557320}
+.slide{position:absolute;inset:0;display:none;align-items:center;justify-content:center;padding:clamp(25px,5vw,70px) clamp(22px,5vw,65px) 100px;overflow:auto}
+.slide.active{display:flex;animation:enter .55s ease both}
+.inner{width:min(900px,100%);margin:auto;text-align:center}
+.kicker{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#b56d91;font-weight:700}
+.script{font-family:"Caveat",cursive;color:#c7779e;font-size:clamp(25px,3vw,34px)}
+.cover h1{font-size:clamp(55px,9vw,105px);line-height:1.02;color:#995477;margin:20px 0}
+.cover h1 em{display:block;color:#d27da5}
+.cover .subtitle{font-size:14px;line-height:1.9;color:#946c83}
+.date{margin-top:25px;font-size:11px;letter-spacing:2px;color:#a47790}
+.photo-layout{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:clamp(25px,6vw,70px);text-align:left}
+.photo-copy h2{font-size:clamp(38px,5vw,58px);color:#995477;margin:13px 0}
+.photo-copy p{font-size:14px;line-height:2;color:#946c83}
+.photo-wrap{position:relative;display:grid;place-items:center;min-height:420px}
+.halo{position:absolute;width:min(380px,100%);aspect-ratio:1;border-radius:50%;background:linear-gradient(145deg,#fff9,#e99fc2aa);box-shadow:0 0 80px #d88eb633}
+.polaroid{position:relative;width:min(310px,82%);padding:12px 12px 52px;background:#fffafc;border-radius:12px;box-shadow:0 25px 65px #8e4c6d35;transform:rotate(3deg);transition:.4s}
+.polaroid:hover{transform:rotate(0) translateY(-6px)}
+.polaroid img{display:block;width:100%;height:350px;object-fit:cover;object-position:center;border-radius:5px}
+.polaroid figcaption{text-align:center;position:absolute;bottom:13px;left:0;right:0;font:25px "Caveat",cursive;color:#b86b91}
+.sticker{position:absolute;z-index:2;font-size:30px;animation:bob 3s ease-in-out infinite}
+.sticker.one{top:35px;right:7%}.sticker.two{bottom:35px;left:3%}
+.letter-card{max-width:790px;padding:clamp(25px,5vw,55px);border-radius:27px;text-align:left;position:relative}
+.letter-card:before{content:"";position:absolute;inset:12px;border:1px solid #dba8c2a0;border-radius:18px;pointer-events:none}
+.letter-head{display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:2px;color:#b47a98;text-transform:uppercase;margin-bottom:25px}
+.letter-card h2{font-size:30px;color:#a7557e;margin:0 0 18px}
+.letter-card p{font-size:14px;line-height:2.05;color:#805a70;margin:0 0 16px;white-space:pre-line}
+.signature{text-align:right;font:30px "Caveat",cursive;color:#bd6c94;margin-top:20px}
+.wish h2{font-size:clamp(40px,6vw,65px);color:#a5537d;margin:17px 0}
+.wish p{font-size:14px;line-height:2;color:#946b82}
+.gift-box{width:145px;height:125px;margin:25px auto 20px;position:relative;cursor:pointer;animation:bob 2.7s ease-in-out infinite;filter:drop-shadow(0 15px 18px #a95b822b)}
+.gift-base{position:absolute;left:8px;right:8px;bottom:0;height:87px;border-radius:8px 8px 13px 13px;background:linear-gradient(120deg,#df91b5,#c56e99)}
+.gift-lid{position:absolute;left:0;right:0;top:27px;height:25px;border-radius:7px;background:linear-gradient(120deg,#f1b6d0,#d982aa);transition:.5s;z-index:2}
+.gift-ribbon-v{position:absolute;z-index:3;top:27px;bottom:0;left:63px;width:20px;background:#fff0d9}
+.gift-ribbon-h{position:absolute;z-index:3;left:8px;right:8px;bottom:35px;height:13px;background:#fff0d9}
+.bow{position:absolute;z-index:4;top:0;left:48px;width:50px;height:32px}
+.bow:before,.bow:after{content:"";position:absolute;width:25px;height:22px;border:8px solid #fff0d9;border-radius:80% 80% 15% 80%;transform:rotate(25deg)}
+.bow:after{left:22px;transform:scaleX(-1) rotate(25deg)}
+.gift-open .gift-lid{transform:translate(18px,-42px) rotate(18deg)}
+.gift-open .gift-box{animation:none}
+#giftMessage{display:none;max-width:520px;margin:22px auto 0;padding:20px 24px;border-radius:20px;background:#fff9;border:1px solid #fff;animation:pop .55s ease both}
+#giftMessage h3{font:26px "Playfair Display",serif;color:#a5537d;margin:0 0 9px}
+#giftMessage p{font-size:13px;line-height:1.9;color:#946b82;margin:0}
+.gift-hint{font-size:12px;color:#a47790}
+.controls{position:absolute;z-index:3;left:0;right:0;bottom:22px;display:flex;align-items:center;justify-content:center;gap:13px}
+.arrow{width:42px;height:42px;border:1px solid #fff;border-radius:50%;background:#ffffffa6;color:#a65e83;font-size:19px;box-shadow:0 5px 20px #99547715}
+.arrow:disabled{opacity:.3;cursor:not-allowed}
+.next-btn{min-width:145px}
+.dots{display:flex;gap:7px;align-items:center;margin:0 5px}
+.dot{width:7px;height:7px;border:0;border-radius:20px;background:#c98aaa77;padding:0;transition:.25s}
+.dot.active{width:22px;background:#bd6a94}
+.counter{position:absolute;top:25px;right:30px;font-size:10px;letter-spacing:2px;color:#a77d94}
+footer{position:absolute;bottom:27px;left:30px;font-size:9px;letter-spacing:1.5px;color:#b1849b}
+
+/* CSS UNTUK GAME MEMORY (TEBAK GAMBAR) */
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 320px;
+    margin: 20px auto;
+}
+.memory-card {
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(135deg, #f4c5d9, #d98bb0);
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: white;
+    transition: transform 0.3s, background 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform-style: preserve-3d;
+    position: relative;
+}
+.memory-card.flipped {
+    background: #fff;
+    color: #75465e;
+    transform: rotateY(180deg);
+}
+.memory-card.matched {
+    background: #fce4ec;
+    cursor: default;
+    transform: rotateY(180deg);
+}
+.memory-card .front-content {
+    display: none;
+    transform: rotateY(180deg); /* Biar pas dibalik gambarnya gak kebalik */
+}
+.memory-card.flipped .front-content, .memory-card.matched .front-content {
+    display: block;
+}
+.memory-card .back-content {
+    position: absolute;
+}
+.memory-card.flipped .back-content, .memory-card.matched .back-content {
+    display: none;
+}
+#game-win-msg {
+    display: none;
+    margin-top: 15px;
+    font-family: "Caveat", cursive;
+    font-size: 24px;
+    color: #a5537d;
+    animation: pop 0.5s ease both;
+}
+
+@media(max-width:700px){
+#show{padding:9px}.deck{border-radius:22px}.slide{padding:38px 19px 105px}
+.photo-layout{grid-template-columns:1fr;gap:0;text-align:center}
+.photo-copy{order:1}.photo-wrap{order:2;min-height:330px}
+.photo-copy h2{font-size:37px}.photo-copy p{font-size:12px}
+.polaroid{width:min(225px,68%);padding:9px 9px 43px}.polaroid img{height:255px}
+.sticker.one{top:10px}.sticker.two{bottom:10px}
+.letter-card{padding:27px 21px}.letter-card:before{inset:8px}
+.letter-card p{font-size:12px;line-height:1.85}.letter-card h2{font-size:25px}
+.letter-head{font-size:8px}.counter{top:15px;right:17px}footer{display:none}
+.controls{bottom:13px;gap:8px}.arrow{width:36px;height:36px}.next-btn{min-width:112px;padding:12px 13px;font-size:12px}.dots{gap:5px}
+.memory-grid { max-width: 280px; gap: 8px; }
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"><div class="orb a"></div><div class="orb b"></div></div>
+
+<section id="gate">
+  <div class="gate-card glass">
+    <div class="seal">♡</div>
+    <div class="eyebrow">a little surprise for you</div>
+    <h1>Hello, Rizma!</h1>
+    <p>Ada sesuatu kecil yang pengen aku kasih buat kamu.<br>But first, you have to unlock it.</p>
+    <div class="clue">୨ৎ &nbsp; <b>Clue:</b> tanggal lahir kamu</div>
+    <form id="form">
+      <input id="pass" type="password" inputmode="numeric" maxlength="6" placeholder="••••••" aria-label="Masukkan PIN" required>
+      <button class="btn">Masuk ♡</button>
+    </form>
+    <div id="error" aria-live="polite"></div>
+  </div>
+</section>
+
+<main id="show">
+ <div class="deck">
+  <div class="counter" id="counter">01 / 05</div>
+
+  <!-- Slide 1: Cover -->
+  <section class="slide active cover">
+   <div class="inner">
+    <div class="kicker">✧ a special day for someone special ✧</div>
+    <div class="script">this little surprise is for you</div>
+    <h1>Happy<br><em>Birthday,</em> Rizma!</h1>
+    <p class="subtitle">A little page, a little memory, and a whole lot of wishes.<br>Semoga hari ini penuh hal-hal baik buat kamu. ♡</p>
+    <div class="date">11 NOVEMBER 2010 · YOUR SPECIAL DAY</div>
+   </div>
+  </section>
+
+  <!-- Slide 2: Foto -->
+  <section class="slide">
+   <div class="inner photo-layout">
+    <div class="photo-copy">
+     <div class="kicker">slide 02 · the birthday girl</div>
+     <div class="script">someone special ♡</div>
+     <h2>It's your day,<br>Rizma!</h2>
+     <p>Hari ini tentang kamu, tentang bertambahnya usia, dan semua cerita indah yang masih menunggu di depan sana.</p>
+    </div>
+    <div class="photo-wrap">
+     <div class="halo"></div><span class="sticker one">✿</span><span class="sticker two">♡</span>
+     <figure class="polaroid"><img src="rizma.png" alt="Foto Rizma"><figcaption>pretty Rizma ♡</figcaption></figure>
+    </div>
+   </div>
+  </section>
+
+  <!-- Slide 3: Surat -->
+  <section class="slide">
+   <div class="inner">
+    <div class="kicker">slide 03 · from me to you</div>
+    <div class="script">a little birthday letter</div>
+    <article class="letter-card glass">
+     <div class="letter-head"><span>♡ a note for Rizma</span><span>11.11.2010</span></div>
+     <h2>Hiiii, Rizmaaa!</h2>
+     <p>Happy birthday teman guehhhh, ihh anzayyyyy, wes suee gak ketemuuuuuuu, kangenn masa² moleh ngajii njajan barengg, mabar barengg, berok² gara² kaget ono musuh pas kalahhh, aduhhh. :&gt;</p>
+     <p>dua bulan ta lebihh gak ketemu blasss, yuyurrrr gak enaksss, ehhh aku tau ngipi amuu, nde ngipi ku ya amuu iku putihh bngttt, ayuu bangett, truss klambi mu iku koyo fairy fairyy ngunuu, plzzz omaygatttt cantiii bangtttt yuyurrrr :)</p>
+     <p>Pokok e, happy birthday yaaa! Semoga hal-hal baik selalu datang ke hidupmu, semoga semua yang kamu pengenin bisa pelan-pelan tercapai, dan semoga kamu selalu punya banyak alasan buat bahagia. Jangan lupa jaga diri, tetap jadi Rizma yang aku kenal. ♡</p>
+     <p>Semoga kapan-kapan kita bisa ketemu lagi, ngobrol, njajan, dan mabar bareng kayak dulu. Kangen banget sama masa-masa ituuu!</p>
+     <div class="signature">with lots of love, your friend ♡</div>
+    </article>
+   </div>
+  </section>
+
+  <!-- Slide 4: GAME TEBAK GAMBAR (BARU) -->
+  <section class="slide">
+   <div class="inner">
+    <div class="kicker">slide 04 · mini game</div>
+    <div class="script">before the gift, let's play!</div>
+    <h2 style="font-size: 28px; color: #a5537d; margin: 10px 0 20px;">Coba Cocokkan Gambarnya ♡</h2>
+    <p style="font-size: 13px; color: #946b82; margin-bottom: 20px;">Temukan 4 pasang gambar yang sama buat buka hadiahnya!</p>
+
+    <!-- Grid 3x3 -->
+    <div class="memory-grid" id="memoryGrid">
+        <!-- Kotak akan di-generate oleh JS di sini -->
+    </div>
+
+    <div id="game-win-msg">
+        Yayy, kamu hebat! Hadiahnya udah nunggu nih 🎁<br>
+        <button class="btn" style="margin-top: 15px;" onclick="goTo(4)">Lanjut ke Hadiah →</button>
+    </div>
+   </div>
+  </section>
+
+  <!-- Slide 5: Hadiah -->
+  <section class="slide">
+   <div class="inner wish" id="giftSlide">
+    <div class="kicker">slide 05 · your little present</div>
+    <div class="script">pssst... there's a gift for you</div>
+    <h2>A little something<br>just for you!</h2>
+    <div class="gift-box" id="giftBox" role="img" aria-label="Kotak hadiah pink">
+     <div class="gift-base"></div><div class="gift-lid"></div><div class="gift-ribbon-v"></div><div class="gift-ribbon-h"></div><div class="bow"></div>
+    </div>
+    <p class="gift-hint" id="giftHint">Pencet tombol di bawah buat buka hadiahmu yaaa ♡</p>
+    <button class="btn" id="openGift">Buka hadiahmu 🎁</button>
+    <div id="giftMessage">
+     <h3>Surpriseee, Rizma! ♡</h3>
+     <p>Hadiah kecil dari aku: semoga kita bisa segera ketemu lagi, njajan bareng, cerita-cerita, dan mabar kayak dulu. Semoga kamu selalu bahagia, sehat, dan dikelilingi orang-orang baik. This little wish is all yours! 💗</p>
+    </div>
+   </div>
+  </section>
+
+  <footer>MADE ESPECIALLY FOR RIZMA · WITH ♡</footer>
+  <div class="controls">
+   <button class="arrow" id="prev" aria-label="Sebelumnya" disabled>‹</button>
+   <div class="dots">
+    <button class="dot active" aria-label="Slide 1"></button><button class="dot" aria-label="Slide 2"></button><button class="dot" aria-label="Slide 3"></button><button class="dot" aria-label="Slide 4"></button><button class="dot" aria-label="Slide 5"></button>
+   </div>
+   <button class="btn next-btn" id="next">Selanjutnya →</button>
+  </div>
+ </div>
+</main>
+
+<script>
+const gate=document.getElementById('gate'),show=document.getElementById('show');
+document.getElementById('form').addEventListener('submit',e=>{
+ e.preventDefault();
+ if(document.getElementById('pass').value==='111110'){
+  gate.style.display='none';show.style.display='block';goTo(0);
+ }else{
+  document.getElementById('error').textContent='PIN-nya belum tepattt, coba lagi yaa ♡';
+  document.getElementById('pass').value='';
+  document.getElementById('pass').focus();
+ }
+});
+
+const slides=[...document.querySelectorAll('.slide')],dots=[...document.querySelectorAll('.dot')];
+let current=0;
+function goTo(n){
+ current=Math.max(0,Math.min(slides.length-1,n));
+ slides.forEach((s,i)=>s.classList.toggle('active',i===current));
+ dots.forEach((d,i)=>d.classList.toggle('active',i===current));
+ document.getElementById('counter').textContent=String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+ document.getElementById('prev').disabled=current===0;
+ const next=document.getElementById('next');
+ if(current===slides.length-1){next.textContent='Selesai ♡';next.disabled=true;}
+ else{next.textContent='Selanjutnya →';next.disabled=false;}
+}
+
+document.getElementById('prev').addEventListener('click',()=>goTo(current-1));
+document.getElementById('next').addEventListener('click',()=>goTo(current+1));
+dots.forEach((d,i)=>d.addEventListener('click',()=>goTo(i)));
+document.addEventListener('keydown',e=>{
+ if(show.style.display==='block'){
+  if(e.key==='ArrowRight')goTo(current+1);
+  if(e.key==='ArrowLeft')goTo(current-1);
+ }
+});
+
+document.getElementById('openGift').addEventListener('click',()=>{
+ document.getElementById('giftSlide').classList.add('gift-open');
+ document.getElementById('giftMessage').style.display='block';
+ document.getElementById('giftHint').textContent='YAYYY, hadiahnya kebuka! ♡';
+ document.getElementById('openGift').style.display='none';
+});
+
+// --- LOGIKA GAME TEBAK GAMBAR (MEMORY GAME) ---
+const icons = [
+    '❤', '❤', // Pasangan 1
+    '🌱', '🌱', // Pasangan 2
+    '🪿', '🪿', // Pasangan 3
+    '🐣', '🐣'  // Pasangan 4
+];
+
+let firstCard = null;
+let secondCard = null;
+let lockBoard = false;
+let matchedPairs = 0;
+
+function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+}
+
+function initGame() {
+    const grid = document.getElementById('memoryGrid');
+    grid.innerHTML = '';
+
+    let gameIcons = [...icons, '⭐']; 
+    gameIcons = shuffle(gameIcons);
+
+    gameIcons.forEach(icon => {
+        const card = document.createElement('div');
+        card.classList.add('memory-card');
+        card.dataset.icon = icon;
+
+        const back = document.createElement('div');
+        back.classList.add('back-content');
+        back.innerHTML = '?'; 
+
+        const front = document.createElement('div');
+        front.classList.add('front-content');
+        front.innerHTML = icon; 
+
+        card.appendChild(back);
+        card.appendChild(front);
+
+        card.addEventListener('click', flipCard);
+        grid.appendChild(card);
+    });
+}
+
+function flipCard() {
+    if (lockBoard) return;
+    if (this === firstCard) return;
+
+    this.classList.add('flipped');
+
+    if (!firstCard) {
+        firstCard = this;
+        return;
+    }
+
+    secondCard = this;
+    checkForMatch();
+}
+
+function checkForMatch() {
+    let isMatch = firstCard.dataset.icon === secondCard.dataset.icon;
+
+    if (isMatch) {
+        disableCards();
+    } else {
+        unflipCards();
+    }
+}
+
+function disableCards() {
+    firstCard.classList.add('matched');
+    secondCard.classList.add('matched');
+    matchedPairs++;
+    resetBoard();
+
+    if (matchedPairs === 4) { 
+        setTimeout(() => {
+            document.getElementById('game-win-msg').style.display = 'block';
+        }, 500);
+    }
+}
+
+function unflipCards() {
+    lockBoard = true;
+    setTimeout(() => {
+        firstCard.classList.remove('flipped');
+        secondCard.classList.remove('flipped');
+        resetBoard();
+    }, 800);
+}
+
+function resetBoard() {
+    [firstCard, secondCard, lockBoard] = [null, null, false];
+}
+
+initGame();
+</script>
+</body>
+</html>
